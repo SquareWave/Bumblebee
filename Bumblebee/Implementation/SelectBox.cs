@@ -7,6 +7,11 @@ namespace Bumblebee.Implementation
 {
     public class SelectBox : Element, ISelectBox
     {
+        public SelectBox(IBlock parent, string cssSelector) 
+            : base(parent, cssSelector)
+        {
+        }
+
         public SelectBox(IBlock parent, By by)
             : base(parent, by)
         {
@@ -25,6 +30,11 @@ namespace Bumblebee.Implementation
 
     public class SelectBox<TResult> : Element, ISelectBox<TResult> where TResult : IBlock
     {
+        public SelectBox(IBlock parent, string cssSelector)
+            : base(parent, cssSelector)
+        {
+        }
+
         public SelectBox(IBlock parent, By by) : base(parent, by)
         {
         }

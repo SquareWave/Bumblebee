@@ -8,9 +8,12 @@ namespace Bumblebee.Implementation
     {
         public IBlock ParentBlock { get; private set; }
 
-        protected Element(IBlock parent, By by) : base(parent.Session, parent.Tag.GetElement(by))
+        protected Element(IBlock parent, string cssSelector) : this(parent, By.CssSelector(cssSelector))
         {
-            ParentBlock = parent;
+        }
+
+        protected Element(IBlock parent, By by) : this(parent, parent.Tag.GetElement(by))
+        {
         }
 
         protected Element(IBlock parent, IWebElement tag) : base(parent.Session, tag)

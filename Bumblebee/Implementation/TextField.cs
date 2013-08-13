@@ -1,10 +1,15 @@
-﻿using Bumblebee.Interfaces;
+﻿using Bumblebee.Extensions;
+using Bumblebee.Interfaces;
 using OpenQA.Selenium;
 
 namespace Bumblebee.Implementation
 {
     public class TextField : Element, ITextField
     {
+        public TextField(IBlock parent, string cssSelector) : base(parent, cssSelector)
+        {
+        }
+
         public TextField(IBlock parent, By by) : base(parent, by)
         {
         }
@@ -28,6 +33,11 @@ namespace Bumblebee.Implementation
 
     public class TextField<TResult> : TextField, ITextField<TResult> where TResult : IBlock
     {
+        public TextField(IBlock parent, string cssSelector)
+            : base(parent, cssSelector)
+        {
+        }
+
         public TextField(IBlock parent, By by)
             : base(parent, by)
         {

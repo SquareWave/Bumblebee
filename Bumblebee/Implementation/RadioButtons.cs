@@ -14,6 +14,11 @@ namespace Bumblebee.Implementation
         private IBlock ParentBlock { get; set; }
         private By By { get; set; }
 
+
+        public RadioButtons(IBlock parent, string cssSelector) : this(parent, By.CssSelector(cssSelector))
+        {
+        }
+
         public RadioButtons(IBlock parent, By by)
         {
             ParentBlock = parent;

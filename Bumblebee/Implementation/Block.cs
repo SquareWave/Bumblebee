@@ -23,12 +23,22 @@ namespace Bumblebee.Implementation
             }
         }
 
+        public IList<IWebElement> GetElements(string cssSelector)
+        {
+            return GetElements(By.CssSelector(cssSelector));
+        }
+
         public IList<IWebElement> GetElements(By by)
         {
             if (Tag == null)
                 throw new NullReferenceException("You can't call GetElements on a block without first initializing Tag.");
 
             return Tag.FindElements(by);
+        }
+
+        public IWebElement GetElement(string cssSelector)
+        {
+            return GetElement(By.CssSelector(cssSelector));
         }
 
         public IWebElement GetElement(By by)

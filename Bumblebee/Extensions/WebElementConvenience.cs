@@ -7,9 +7,19 @@ namespace Bumblebee.Extensions
 {
     public static class WebElementConvenience
     {
+        public static IList<IWebElement> GetElements(this ISearchContext driver, string cssSelector)
+        {
+            return driver.GetElements(By.CssSelector(cssSelector));
+        }
+
         public static IList<IWebElement> GetElements(this ISearchContext driver, By by)
         {
             return driver.FindElements(by);
+        }
+
+        public static IWebElement GetElement(this ISearchContext driver, string cssSelector)
+        {
+            return driver.GetElement(By.CssSelector(cssSelector));
         }
 
         public static IWebElement GetElement(this ISearchContext driver, By by)

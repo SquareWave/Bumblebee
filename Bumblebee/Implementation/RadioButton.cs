@@ -6,6 +6,10 @@ namespace Bumblebee.Implementation
 {
     public class RadioButton<TResult> : Option<TResult> where TResult : IBlock
     {
+        public RadioButton(IBlock parent, string cssSelector) : base(parent, cssSelector)
+        {
+        }
+
         public RadioButton(IBlock parent, By by) : base(parent, by)
         {
         }
