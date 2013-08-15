@@ -1,12 +1,23 @@
 using System;
+using System.Drawing;
+using System.Globalization;
 using Bumblebee.Interfaces;
+using Bumblebee.Setup;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Interactions.Internal;
 using OpenQA.Selenium.Support.UI;
 
 namespace Bumblebee.Extensions
 {
     public static class AdvancedSeleniumActions
     {
+        public static void ClickLocation(this Session session, int x, int y)
+        {
+            var body = session.Driver.GetElement("body");
+            new Actions(session.Driver).MoveToElement(body, x, y).Click();
+        }
+
         public static TElement Hover<TElement>(this TElement element, int miliseconds = 0) where TElement : IElement
         {
             new Actions(element.Session.Driver).MoveToElement(element.Tag).Perform();
