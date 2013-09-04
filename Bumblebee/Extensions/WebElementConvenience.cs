@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
@@ -14,7 +15,7 @@ namespace Bumblebee.Extensions
 
         public static IList<IWebElement> GetElements(this ISearchContext driver, By by)
         {
-            return driver.FindElements(by);
+            return driver.FindElements(by).Where(el => el.Displayed).ToList();
         }
 
         public static IWebElement GetElement(this ISearchContext driver, string cssSelector)
@@ -24,7 +25,15 @@ namespace Bumblebee.Extensions
 
         public static IWebElement GetElement(this ISearchContext driver, By by)
         {
-            return driver.FindElement(by);
+            var element = driver.FindElement(by);
+            try
+            {
+                return element.Displayed ? element : driver.FindElements(by).First(el => el.Displayed);
+            }
+            catch (InvalidOperationException)
+            {
+                throw new NoSuchElementException("There exists an element with the given selector, but it is not displayed.");
+            }
         }
 
         public static IWebDriver GetDriver(this IWebElement element)

@@ -8,13 +8,16 @@ namespace Bumblebee.Setup
 {
     public class Session
     {
-        public IWebDriver Driver { get; private set; }
+        [ThreadStatic] public static Session Current;
+
+        public virtual IWebDriver Driver { get; protected set; }
 
         public IMonkey Monkey { get; protected set; }
 
         public Session(IDriverEnvironment environment)
         {
             Driver = environment.CreateWebDriver();
+            Current = this;
         }
 
         public TBlock NavigateTo<TBlock>(string url) where TBlock : IBlock
@@ -46,7 +49,7 @@ namespace Bumblebee.Setup
             return (TBlock) constructor.Invoke(constructorArgs.ToArray());
         }
 
-        public void End()
+        public virtual void End()
         {
             Driver.Quit();
         }

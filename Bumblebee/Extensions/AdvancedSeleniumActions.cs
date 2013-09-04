@@ -14,8 +14,8 @@ namespace Bumblebee.Extensions
     {
         public static void ClickLocation(this Session session, int x, int y)
         {
-            var body = session.Driver.GetElement("body");
-            new Actions(session.Driver).MoveToElement(body, x, y).Click();
+            var body = session.Driver.GetElement("html");
+            new Actions(session.Driver).MoveToElement(body, x, y).Click().Build().Perform();
         }
 
         public static TElement Hover<TElement>(this TElement element, int miliseconds = 0) where TElement : IElement
